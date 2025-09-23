@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://7gvu0ss6jbe7"]
+
+[ext_resource type="Script" uid="uid://def32m0jf1hdf" path="res://world_3d.gd" id="1_u8qh4"]
+
+[sub_resource type="Environment" id="Environment_q38ww"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_u8qh4"]
+
+[node name="GameCanvas" type="CanvasLayer"]
+
+[node name="World3D" type="Node3D" parent="."]
+script = ExtResource("1_u8qh4")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World3D"]
+environment = SubResource("Environment_q38ww")
+
+[node name="GamePlane" type="MeshInstance3D" parent="World3D"]
+mesh = SubResource("PlaneMesh_u8qh4")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5, 0)
+
+[node name="Camera3D" type="Camera3D" parent="World3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.124129, 0.326257)
