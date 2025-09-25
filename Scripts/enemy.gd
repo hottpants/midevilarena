@@ -2,9 +2,12 @@ class_name Enemy
 
 extends CharacterBody3D
 
-
+const DAMAGE_TEXTURE = preload("res://Resources/damage_texture.tres")
+const ENEMY_TEXTURE = preload("res://Resources/enemy_texture.tres")
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
+
+const _3DSOUND = preload("res://Scenes/3dsound.tscn")
 
 @export var health = 100
 
@@ -32,6 +35,17 @@ func _physics_process(delta: float) -> void:
 
 
 func take_damage(damage: int):
+	var new_sound = _3DSOUND.instantiate()
+	new_sound.stream = load("res://Audio/young-man-being-hurt-95628.mp3")
+	add_sibling(new_sound)
+	new_sound.global_position = global_position
+	new_sound.play()
+	$EnemyShape/DamageTimer.start()
+	$EnemyShape.set_surface_override_material(0, DAMAGE_TEXTURE)
 	health -= damage
 	if health <= 0:
+		
 		queue_free()
+
+func _on_damage_timer_timeout() -> void:
+	$EnemyShape.set_surface_override_material(0, ENEMY_TEXTURE)

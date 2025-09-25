@@ -1,15 +1,11 @@
 [gd_scene load_steps=5 format=3 uid="uid://diklygsp435av"]
 
 [ext_resource type="Script" uid="uid://bjwuknxo85vwr" path="res://Scripts/enemy.gd" id="1_hghv2"]
+[ext_resource type="Material" uid="uid://dinqhme4ptp0w" path="res://Resources/enemy_texture.tres" id="2_1f0kj"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ne65n"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_hghv2"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1f0kj"]
-albedo_color = Color(0.416754, 8.48304e-07, 2.16588e-07, 1)
-metallic = 1.0
-metallic_specular = 1.0
 
 [node name="Enemy" type="CharacterBody3D"]
 script = ExtResource("1_hghv2")
@@ -19,4 +15,10 @@ shape = SubResource("CapsuleShape3D_ne65n")
 
 [node name="EnemyShape" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_hghv2")
-surface_material_override/0 = SubResource("StandardMaterial3D_1f0kj")
+surface_material_override/0 = ExtResource("2_1f0kj")
+
+[node name="DamageTimer" type="Timer" parent="EnemyShape"]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="EnemyShape/DamageTimer" to="." method="_on_damage_timer_timeout"]

@@ -23,6 +23,11 @@ window/size/viewport_height=1080
 [file_customization]
 
 folder_colors={
+"res://Audio/": "teal",
+"res://Resources/": "green",
+"res://Resources/Materials/": "purple",
+"res://Resources/Shaders/": "blue",
+"res://Resources/Textures/": "pink",
 "res://Scenes/": "red",
 "res://Scripts/": "orange",
 "res://Sprites/": "yellow"

@@ -1,16 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://bubmbolm6opce"]
+[gd_scene load_steps=7 format=3 uid="uid://bubmbolm6opce"]
 
 [ext_resource type="Script" uid="uid://7crelajlevaa" path="res://Scripts/projectile.gd" id="1_f8cdk"]
+[ext_resource type="Shader" uid="uid://88a6cf81tyv8" path="res://Resources/Shaders/fireballs.tres" id="2_tl4hk"]
+[ext_resource type="AudioStream" uid="uid://cvbwyvlub1562" path="res://Audio/explosion-312361.mp3" id="2_yr2qt"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_f8cdk"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_akgne"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a85iw"]
-albedo_color = Color(0.701575, 0.210502, 0, 1)
-emission_enabled = true
-emission = Color(1, 1, 1, 1)
-emission_energy_multiplier = 0.1
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d4467"]
+render_priority = 0
+shader = ExtResource("2_tl4hk")
+shader_parameter/Explosion_Color = Color(0.980658, 0.317931, 0, 1)
 
 [node name="Projectile" type="ShapeCast3D"]
 top_level = true
@@ -20,11 +21,14 @@ script = ExtResource("1_f8cdk")
 
 [node name="ProjectileBody" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_akgne")
-surface_material_override/0 = SubResource("StandardMaterial3D_a85iw")
+surface_material_override/0 = SubResource("ShaderMaterial_d4467")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 10.0
 one_shot = true
 autostart = true
+
+[node name="ExplosionAudio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_yr2qt")
 
 [connection signal="timeout" from="Timer" to="." method="cleanup"]
