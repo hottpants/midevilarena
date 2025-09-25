@@ -3,10 +3,14 @@ extends Node3D
 const PLAYER = preload("res://Scenes/player.tscn")
 const ENEMY = preload("res://Scenes/enemy.tscn")
 
+var player
+var paused := false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
-	var player = PLAYER.instantiate()
+	$"../HUD/Menu".visible = false
+	player = PLAYER.instantiate()
 	add_child(player)
 	
 	var enemy = ENEMY.instantiate()
@@ -17,4 +21,25 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if Input.is_action_just_pressed("pause"):
+		if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE: ## PAUSED
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			$"../HUD/Menu".visible = false
+			paused = false
+		else:                                            ## NOT PAUSED
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			$"../HUD/Menu".visible = true
+			paused = true
+
+
+func _on_resume_pressed() -> void:
+	if paused:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		$"../HUD/Menu".visible = false
+		paused = false
+		player.paused = false
+		
+
+
+func _on_exit_pressed() -> void:
+	get_tree().quit()

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://crtbthbrs5pta"]
+
+[ext_resource type="Script" uid="uid://bnhldng6xitv6" path="res://Scripts/explosion_area.gd" id="1_8sa2g"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_eh50f"]
+
+[node name="ExplosionArea" type="Area3D"]
+script = ExtResource("1_8sa2g")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_eh50f")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

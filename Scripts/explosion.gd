@@ -6,5 +6,4 @@ func _ready() -> void:
 	$AnimationPlayer.play("Init")
 	
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	print("NUTS")
 	queue_free()

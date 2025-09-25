@@ -1,8 +1,12 @@
+class_name Player
+
 extends CharacterBody3D
 
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
+
+var paused := false
 
 var look_dir: Vector2
 @onready var camera = $Camera3D
@@ -21,11 +25,10 @@ func _physics_process(delta: float) -> void:
 		velocity.y = JUMP_VELOCITY
 	
 	if Input.is_action_just_pressed("pause"):
-		if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE:
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-		else:
-			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		
+		if Input.mouse_mode == Input.MOUSE_MODE_VISIBLE: ## PAUSED
+			paused = false
+		else:                                            ## NOT PAUSED
+			paused = true
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir := Input.get_vector("left", "right", "forward", "back")
@@ -44,7 +47,7 @@ func _input(event: InputEvent):
 	if event is InputEventMouseMotion: look_dir = event.relative * 0.01
 
 func _rotate_camera(delta: float, sens_mod: float = 1.0):
-	if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+	if not paused:
 		var input = Input.get_vector("look_left", "look_right", "look_down", "look_up")
 		look_dir += input
 		rotation.y -= look_dir.x * camera_sens * delta

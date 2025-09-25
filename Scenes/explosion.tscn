@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dg1vddacs75vl"]
+[gd_scene load_steps=30 format=3 uid="uid://bo80ep2qqween"]
 
 [ext_resource type="Material" uid="uid://l1jlobdbk32v" path="res://Resources/Materials/material_explosive_cloud.tres" id="1_a801j"]
 [ext_resource type="Script" uid="uid://b8cvdvq7ncrjs" path="res://Scripts/explosion.gd" id="1_k2xjm"]
