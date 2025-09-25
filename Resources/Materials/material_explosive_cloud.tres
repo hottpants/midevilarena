@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://l1jlobdbk32v"]
+
+[ext_resource type="Shader" uid="uid://c78x4pnmbiqmg" path="res://Resources/Shaders/shader_explosion_cloud.tres" id="1_mdeu2"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_mdeu2")
+shader_parameter/Cloud_Speed = Vector2(0, 0.7)
+shader_parameter/Cloud_Intensity = 0.2
+shader_parameter/Explosion_Color = Color(0.980658, 0.317931, 0, 1)
