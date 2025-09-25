@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://c11ajf28cg4sk"]
+[gd_scene load_steps=6 format=3 uid="uid://c11ajf28cg4sk"]
 
-[ext_resource type="Script" uid="uid://7ga7tadt61of" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://7ga7tadt61of" path="res://Scripts/player.gd" id="1_v0iea"]
+[ext_resource type="PackedScene" uid="uid://da63d73citctm" path="res://Scenes/projectile_spawner.tscn" id="2_cvnsp"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
 
@@ -10,7 +11,7 @@ albedo_color = Color(0.0614935, 0.381064, 0.719716, 1)
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_4flbx"]
 
 [node name="Player" type="CharacterBody3D"]
-script = ExtResource("1_4flbx")
+script = ExtResource("1_v0iea")
 
 [node name="PlayerCollision" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_sh265")
@@ -22,3 +23,6 @@ mesh = SubResource("CapsuleMesh_4flbx")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.794732, -0.00268888)
 fov = 90.0
+
+[node name="ProjectileSpawner" parent="Camera3D" instance=ExtResource("2_cvnsp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.778417)
