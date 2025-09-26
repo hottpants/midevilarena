@@ -25,4 +25,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.794732, -0.00268888)
 fov = 90.0
 
 [node name="ProjectileSpawner" parent="Camera3D" instance=ExtResource("2_cvnsp")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.778417)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0642705, -1.19553)
