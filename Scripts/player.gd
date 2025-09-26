@@ -6,6 +6,8 @@ extends CharacterBody3D
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
+var friction := 0.8
+
 var paused := false
 
 var look_dir: Vector2
@@ -19,7 +21,9 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-
+	elif not velocity == Vector3(0,0,0) and is_on_floor():
+		velocity *= friction
+		
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
