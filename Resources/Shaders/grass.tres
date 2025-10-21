@@ -1,0 +1,23 @@
+[gd_resource type="Shader" format=3 uid="uid://bwaoc2kpoc8el"]
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_lambert, specular_schlick_ggx;
+
+uniform vec3 color : source_color;
+uniform vec3 color2 : source_color;
+uniform sampler2D noise;
+uniform float noiseScale = 20.0;
+
+varying vec3 worldPos;
+
+void vertex() {
+	worldPos = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
+}
+
+void fragment() {
+	vec3 noiseLevel = texture(noise, worldPos.xz / noiseScale).rgb;
+	ALBEDO = mix(color, color2, UV.y);
+}
+
+"
