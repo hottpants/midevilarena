@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://7gvu0ss6jbe7"]
+[gd_scene load_steps=10 format=3 uid="uid://7gvu0ss6jbe7"]
 
 [ext_resource type="Script" uid="uid://def32m0jf1hdf" path="res://Scripts/world_3d.gd" id="1_3ueiv"]
 [ext_resource type="Texture2D" uid="uid://vnq4ejk0miiu" path="res://Sprites/pixil-frame-0.png" id="2_cnxep"]
+[ext_resource type="Shader" uid="uid://cmrhkjavd2v35" path="res://Resources/Shaders/ground.tres" id="2_deuvg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u8qh4"]
 sky_top_color = Color(0.164195, 0.418183, 0.873869, 1)
@@ -24,26 +25,11 @@ size = Vector3(60, 2, 60)
 [sub_resource type="BoxMesh" id="BoxMesh_u8qh4"]
 size = Vector3(60, 2, 60)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yu30h"]
+render_priority = 0
+shader = ExtResource("2_deuvg")
+
 [node name="GameCanvas" type="CanvasLayer"]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_v5jsk")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
-shadow_enabled = true
-
-[node name="World3D" type="Node3D" parent="."]
-script = ExtResource("1_3ueiv")
-
-[node name="Ground" type="StaticBody3D" parent="World3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
-
-[node name="GroundCollision" type="CollisionShape3D" parent="World3D/Ground"]
-shape = SubResource("BoxShape3D_u8qh4")
-
-[node name="GroundShape" type="MeshInstance3D" parent="World3D/Ground"]
-mesh = SubResource("BoxMesh_u8qh4")
 
 [node name="HUD" type="Control" parent="."]
 layout_mode = 3
@@ -97,6 +83,26 @@ text = "Resume"
 [node name="Exit" type="Button" parent="HUD/Menu/VBoxContainer/VBoxContainer"]
 layout_mode = 2
 text = "Exit"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_v5jsk")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="World3D" type="Node3D" parent="."]
+script = ExtResource("1_3ueiv")
+
+[node name="Ground" type="StaticBody3D" parent="World3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -10, 0)
+
+[node name="GroundCollision" type="CollisionShape3D" parent="World3D/Ground"]
+shape = SubResource("BoxShape3D_u8qh4")
+
+[node name="GroundShape" type="MeshInstance3D" parent="World3D/Ground"]
+mesh = SubResource("BoxMesh_u8qh4")
+surface_material_override/0 = SubResource("ShaderMaterial_yu30h")
 
 [connection signal="pressed" from="HUD/Menu/VBoxContainer/VBoxContainer/Resume" to="World3D" method="_on_resume_pressed"]
 [connection signal="pressed" from="HUD/Menu/VBoxContainer/VBoxContainer/Exit" to="World3D" method="_on_exit_pressed"]
