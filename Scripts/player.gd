@@ -13,10 +13,14 @@ var paused := false
 var look_dir: Vector2
 @onready var camera = $Camera3D
 var camera_sens = 50
+const SWORD = preload("res://Scenes/sword.tscn")
 
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-
+	var sword = SWORD.instantiate()
+	add_child(sword)
+	
+	
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
