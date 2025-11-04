@@ -19,7 +19,7 @@ sky = SubResource("Sky_hdufq")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yu30h"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_deuvg"]
 render_priority = 0
 shader = ExtResource("2_deuvg")
 
@@ -90,9 +90,9 @@ script = ExtResource("1_3ueiv")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="World3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.02407, 0)
-material_override = SubResource("ShaderMaterial_yu30h")
 use_collision = true
 size = Vector3(60, 1, 60)
+material = SubResource("ShaderMaterial_deuvg")
 
 [connection signal="pressed" from="HUD/Menu/VBoxContainer/VBoxContainer/Resume" to="World3D" method="_on_resume_pressed"]
 [connection signal="pressed" from="HUD/Menu/VBoxContainer/VBoxContainer/Exit" to="World3D" method="_on_exit_pressed"]
