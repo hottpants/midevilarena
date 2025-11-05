@@ -15,10 +15,47 @@ var look_dir: Vector2
 var camera_sens = 50
 const SWORD = preload("res://Scenes/sword.tscn")
 
-func _ready():
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+var left_hand: String
+var right_hand: String
+
+var left_empty := true
+var right_empty := true
+
+func hold_item(item: String):
+	if not get_right() == "":
+		set_left(item)
+	else: set_right(item)
+	print("item: " + get_right())
+	print("item: " + get_left())
+	if get_left() == "sword" and left_empty:
+		spawn_sword("left")
+	if get_right() == "sword" and right_empty:
+		spawn_sword("right")
+	
+func spawn_sword(hand: String):
 	var sword = SWORD.instantiate()
 	$Camera3D.add_child(sword)
+	match hand:
+		"left":
+			left_empty = false
+		"right":
+			right_empty = false
+#sword overrites fireball
+
+
+func get_left():
+	return left_hand
+func get_right():
+	return right_hand
+func set_left(s: String):
+	left_hand = s
+func set_right(s: String):
+	right_hand = s
+func _ready():
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	
+	
+	
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.

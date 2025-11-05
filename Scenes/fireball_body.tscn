@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8u4dk4sjyxin"]
+
+[ext_resource type="Shader" uid="uid://88a6cf81tyv8" path="res://Resources/Shaders/fireballs.tres" id="1_6a7hc"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_1685l"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jirnd"]
+render_priority = 0
+shader = ExtResource("1_6a7hc")
+shader_parameter/Explosion_Color = Color(0.980658, 0.317931, 0, 1)
+
+[node name="FireballBody" type="Node3D"]
+
+[node name="ProjectileBody" type="MeshInstance3D" parent="."]
+mesh = SubResource("SphereMesh_1685l")
+surface_material_override/0 = SubResource("ShaderMaterial_jirnd")

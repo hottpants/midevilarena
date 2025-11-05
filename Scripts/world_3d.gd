@@ -2,6 +2,7 @@ extends Node3D
 ## penis
 const PLAYER = preload("res://Scenes/player.tscn")
 const ENEMY = preload("res://Scenes/enemy.tscn")
+const ITEM = preload("res://Scenes/item.tscn")
 
 var player
 var paused := false
@@ -9,6 +10,11 @@ var paused := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	for i in range(50):
+		var item = ITEM.instantiate()
+		
+		add_child(item)
+		item.global_position = Vector3(randi_range(-25, 25), -2, randi_range(-25, 25))
 	
 	MENU.visible = false
 	player = PLAYER.instantiate()
